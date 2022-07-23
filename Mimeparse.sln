@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mimeparse", "Mimeparse.csproj", "{BC903955-24C6-4CF3-9EBF-54147EE4D60D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC903955-24C6-4CF3-9EBF-54147EE4D60D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC903955-24C6-4CF3-9EBF-54147EE4D60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC903955-24C6-4CF3-9EBF-54147EE4D60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC903955-24C6-4CF3-9EBF-54147EE4D60D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81BC3FEE-C6EC-480F-9752-089341F6A813}
+	EndGlobalSection
+EndGlobal
