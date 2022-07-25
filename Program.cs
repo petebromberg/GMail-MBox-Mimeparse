@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MimeKit;
 using System.IO;
+using System.Configuration;
 
 namespace Mimeparse
 {
@@ -12,46 +13,39 @@ namespace Mimeparse
     {
         static void Main(string[] args)
         {
-            string filePath = @"C:\temp\notifications\Notifications.mbox";
+            string filePath = ConfigurationManager.AppSettings["mboxLocation"]; // e.g.  @"C:\temp\notifications\Notifications.mbox";
 
             FileStream stm = new FileStream(filePath, FileMode.Open);
             MimeKit.MimeParser parser = new MimeParser(stm, MimeFormat.Mbox);
-
-            
+            int ctr = 0;
+            string csv = String.Empty;
+            csv += $"name, email" + Environment.NewLine;
             try
             {
                 while (!parser.IsEndOfStream)
                 {
-                    
                     var message = parser.ParseMessage();
-                    // use substring to get out email betweeen "< and >"]
-                    /// sample: From: Kiran Bingi <bkiran@futransolutions.com>
                     string line = message.From[0].ToString();
-                    //  if (line.Contains(","))
+
                     string name = "";
                     string email = "";
-                    try
-                    {
-                        if(line.Contains("<"))
-                        name = line.Substring(0, line.IndexOf("<"));
-                    }
-                    catch (Exception e) {
-                        Console.WriteLine(e.ToString());
-                    };
-                    if(line.Contains("<"))
-                     email = line.Substring(line.IndexOf("<")+1, line.IndexOf(">") -1);
-                    Console.WriteLine( name + "," +email);
-                  // else
-                      //  Console.WriteLine(line);
-                   // add to csv file here
-                  
+
+                    System.Net.Mail.MailAddress addr = new System.Net.Mail.MailAddress(line);
+                    name = addr.DisplayName;
+                    email = addr.Address;
+                    var newline = $"{name},{email}" + Environment.NewLine;
+                    csv += newline;
+                    Console.WriteLine(name + ", " + email);
                 }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            
+            string csvvLocation = ConfigurationManager.AppSettings["csvLocation"];           
+            File.WriteAllText(csvvLocation, csv);
+
         }
     }
 }
