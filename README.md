@@ -7,6 +7,6 @@ The steps are as follows:
    ### D) format separate CSV files to be imported into Google Contacts, each with no more than 500 emails each (that's Gmail's limit per 24 hours)
    ### E) Using Gmail, IMPORT each CSV file to your Contacts, giving each a label name.
    ### F) create your email including any attachments. Send it to yourself, and in the BCC field type in the name of your contacts label.
-    ### G) send the email.
+   ### G) send the email.
     
     This uses the MimeKit library which is freely available via Nuget.
