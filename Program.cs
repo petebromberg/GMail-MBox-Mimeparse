@@ -20,22 +20,27 @@ namespace Mimeparse
             int ctr = 0;
             string csv = String.Empty;
             csv += $"name, email" + Environment.NewLine;
+            int numDaysBack = Convert.ToInt32(ConfigurationManager.AppSettings["numDaysBack"]);
             try
             {
-                while (!parser.IsEndOfStream)
+                while (!parser.IsEndOfStream )
                 {
                     var message = parser.ParseMessage();
-                    string line = message.From[0].ToString();
+                    if (message.Date > DateTime.Now.AddDays(numDaysBack * -1))
+                    {
+                        var headers = message.Headers;
+                        string line = message.From[0].ToString();
 
-                    string name = "";
-                    string email = "";
+                        string name = "";
+                        string email = "";
 
-                    System.Net.Mail.MailAddress addr = new System.Net.Mail.MailAddress(line);
-                    name = addr.DisplayName;
-                    email = addr.Address;
-                    var newline = $"{name},{email}" + Environment.NewLine;
-                    csv += newline;
-                    Console.WriteLine(name + ", " + email);
+                        System.Net.Mail.MailAddress addr = new System.Net.Mail.MailAddress(line);
+                        name = addr.DisplayName;
+                        email = addr.Address;
+                        var newline = $"{name},{email}" + Environment.NewLine;
+                        csv += newline;
+                        Console.WriteLine(name + ", " + email);
+                    }
                 }
 
             }
