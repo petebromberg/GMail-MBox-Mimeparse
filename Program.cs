@@ -37,6 +37,8 @@ namespace Mimeparse
                         System.Net.Mail.MailAddress addr = new System.Net.Mail.MailAddress(line);
                         name = addr.DisplayName;
                         email = addr.Address;
+                        if (String.IsNullOrEmpty(name))
+                            name = email;
                         var newline = $"{name},{email}" + Environment.NewLine;
                         csv += newline;
                         Console.WriteLine(name + ", " + email);
