@@ -19,7 +19,7 @@ namespace Mimeparse
             MimeKit.MimeParser parser = new MimeParser(stm, MimeFormat.Mbox);
             int ctr = 0;
             string csv = String.Empty;
-            csv += $"name, email" + Environment.NewLine;
+            csv += $"date, name, email" + Environment.NewLine;
             int numDaysBack = Convert.ToInt32(ConfigurationManager.AppSettings["numDaysBack"]);
             try
             {
@@ -33,15 +33,17 @@ namespace Mimeparse
 
                         string name = "";
                         string email = "";
+                        string date = message.Date.ToString();
 
                         System.Net.Mail.MailAddress addr = new System.Net.Mail.MailAddress(line);
                         name = addr.DisplayName;
                         email = addr.Address;
+                        date = DateTime.Now.ToString();
                         if (String.IsNullOrEmpty(name))
                             name = email;
-                        var newline = $"{name},{email}" + Environment.NewLine;
+                        var newline = $"{date},{name},{email}" + Environment.NewLine;
                         csv += newline;
-                        Console.WriteLine(name + ", " + email);
+                        Console.WriteLine(date + ", " + name + ", " + email);
                     }
                 }
 
