@@ -8,5 +8,5 @@ The steps are as follows:
    ### E) Using Gmail Contacts, IMPORT each CSV file to your Contacts, giving each a label name.
    ### F) create your email including any attachments. Send it to yourself, and in the BCC field type in the name of your contacts label.
    ### G) send the email.
-    
+    THere are 3 settings in App.Config that are self-explanatory.
     This uses the MimeKit library which is freely available via Nuget.
