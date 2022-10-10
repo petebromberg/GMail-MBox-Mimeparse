@@ -11,6 +11,12 @@ namespace Mimeparse
 {
     internal class Program
     {
+        /// <summary>
+        /// Main method
+        /// </summary>
+        /// <param name="args"></param>
+        // <created>pbromberg,10/10/2022</created>
+        // <changed>pbromberg,10/10/2022</changed>
         static void Main(string[] args)
         {
             string filePath = ConfigurationManager.AppSettings["mboxLocation"]; // e.g.  @"C:\temp\notifications\Notifications.mbox";
