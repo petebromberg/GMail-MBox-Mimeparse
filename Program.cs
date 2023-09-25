@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 using MimeKit;
 using System.IO;
 using System.Configuration;
+using System.Windows.Forms;
 
 namespace Mimeparse
 {
-    internal class Program
+   
+    internal class Program 
+  
     {
         /// <summary>
         /// Main method
@@ -17,10 +20,28 @@ namespace Mimeparse
         /// <param name="args"></param>
         // <created>pbromberg,10/10/2022</created>
         // <changed>pbromberg,10/10/2022</changed>
+         [STAThread]
         static void Main(string[] args)
         {
             string filePath = ConfigurationManager.AppSettings["mboxLocation"]; // e.g.  @"C:\temp\notifications\Notifications.mbox";
+                                                                                // filePath = @"C\temp\notfications\notfications.mbox";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "mbox files (*.mbox)|*.txt|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+                  
+                   
+                }
+            }
+            
             FileStream stm = new FileStream(filePath, FileMode.Open);
             MimeKit.MimeParser parser = new MimeParser(stm, MimeFormat.Mbox);
             int ctr = 0;
@@ -58,8 +79,11 @@ namespace Mimeparse
             {
                 Console.WriteLine(ex.Message);
             }
-            string csvvLocation = ConfigurationManager.AppSettings["csvLocation"];           
-            File.WriteAllText(csvvLocation, csv);
+            string csvLocation = ConfigurationManager.AppSettings["csvLocation"];           
+            File.WriteAllText(csvLocation, csv);
+            Console.WriteLine("Done with export- any key to quit");
+            Console.ReadKey();
+
 
         }
     }
